@@ -18,6 +18,9 @@ let package = Package(
         .target (
             name: "Die",
             dependencies: []),
+        .target (
+            name: "Player",
+            dependencies: []),
         .testTarget(
             name: "ZombieDiceGameTests",
             dependencies: ["ZombieDiceGame"]),
