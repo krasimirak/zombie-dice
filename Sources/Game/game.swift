@@ -2,26 +2,31 @@ import Player
 import Die
 
 public class Game {
-    var players: [Player]
-    var diceWithStatus: [Die: Bool]?
+    var players: [Player] = []
+    var dice: [Die] = []
+    var dieInUse: [Bool] = []
     public init (numberOfPlayers: Int) {
-        players = []
-        diceWithStatus = nil
+        
+        for i in 1...numberOfPlayers {
+            let newPlayer = getPlayer(playerNumber: i)
+            players.append(newPlayer)
+        }
+        
+        for _ in 1...6 {
+            dice.append(Die.green)
+            dieInUse.append(false)
+        }
+        
+        for _ in 1...4 {
+            dice.append(Die.yellow)
+            dieInUse.append(false)
+        }
+        
+        for _ in 1...3 {
+            dice.append(Die.red)
+            dieInUse.append(false)
+        }
     }
-}
-
-public func startGame() {
-    print("\n\nIf you want to start a game press enter\n If you want to quit type whatever you want then press enter.")
-    let initialCommand = readLine()
-    
-    if initialCommand != "" {
-        print("\n\nExiting program")
-        return
-    }
-
-    let numPlayers = getNumPlayers()
-    let _ = Game(numberOfPlayers: numPlayers)
-
 }
 
 func getNumPlayers() -> Int {
@@ -49,4 +54,33 @@ func validateNumberOfPlayers(_ num: Int?) -> Int {
     }
     
     return num!
+}
+
+
+func getPlayer(playerNumber: Int) -> Player {
+    print("\n\nPlease enter player \(playerNumber) name: ")
+    let inputName: String? = readLine()
+    let defaultName:String = "Player \(String(playerNumber))"
+    
+    if inputName == nil {
+        return Player(defaultName)
+    }
+    if inputName! == "" {
+        return Player(defaultName)
+    }
+    
+    return Player(inputName!)
+}
+
+public func startGame() {
+    print("\n\nIf you want to start a game press enter\n If you want to quit type whatever you want then press enter.")
+    let initialCommand = readLine()
+    
+    if initialCommand != "" {
+        print("\n\nExiting program")
+        return
+    }
+
+    let numPlayers = getNumPlayers()
+    let _ = Game(numberOfPlayers: numPlayers)
 }
