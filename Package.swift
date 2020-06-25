@@ -14,13 +14,16 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
             name: "ZombieDiceGame",
-            dependencies: ["Die", "Player"]),
+            dependencies: ["Die", "Player", "Game"]),
         .target (
             name: "Die",
             dependencies: []),
         .target (
             name: "Player",
             dependencies: []),
+        .target (
+            name: "Game",
+            dependencies: ["Die", "Player"]),
         .testTarget(
             name: "ZombieDiceGameTests",
             dependencies: ["ZombieDiceGame"]),
