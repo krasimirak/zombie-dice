@@ -5,11 +5,12 @@ public class Game {
     var players: [Player] = []
     var dice: [Die] = []
     
-    public init (numberOfPlayers: Int) {
+    public init (numberOfPlayers: Int) throws {
         
         for i in 1...numberOfPlayers {
-            let newPlayer = getPlayer(playerNumber: i)
+            let newPlayer = try getPlayer(playerNumber: i)
             players.append(newPlayer)
+            print(newPlayer.getName())
         }
         
         appendDie(&dice, Die.green, 6)
@@ -55,19 +56,20 @@ var appendDie: (inout [Die], Die, Int) -> Void = { (arr, color, count) in
     }
 }
 
-func getPlayer(playerNumber: Int) -> Player {
+func getPlayer(playerNumber: Int) throws -> Player  {
     print("\n\nPlease enter player \(playerNumber) name: ")
     let inputName: String? = readLine()
-    let defaultName:String = "Player \(String(playerNumber))"
     
-    if inputName == nil {
-        return Player(defaultName)
+    var player: Player
+    
+    do {
+        player = try Player(inputName)
     }
-    if inputName! == "" {
-        return Player(defaultName)
+    catch {
+        player = try Player(playerNumber: playerNumber)
     }
     
-    return Player(inputName!)
+    return player
 }
 
 public func startGame() {
@@ -80,5 +82,10 @@ public func startGame() {
     }
 
     let numPlayers = getNumPlayers()
-    let _ = Game(numberOfPlayers: numPlayers)
+    do {
+        let _ = try Game(numberOfPlayers: numPlayers)
+    }
+    catch {
+        print("Something went wrong! Did you follow the instructions?")
+    }
 }

@@ -1,27 +1,28 @@
-public class Player {
-    var name: String?
+import Person
+
+public class Player: Person {
     var points: Int
     
-    public init(_ name: String? = nil) {
-        if name == nil {
-            self.name = "No name"
-        }
-        else {
-            self.name = name
-        }
-
+    public override init(_ name: String? = nil) throws {
         points = 0
+        try super.init(name)
     }
     
+    public convenience init(playerNumber: Int) throws {
+        let defaultName = "Player \(playerNumber)"
+        try self.init(defaultName)
+    }
+    
+    deinit {
+        print("Clearing player: \(name) from memory")
+    }
+}
+
+
+extension Player {
     public func addPoints(newPoints: Int) {
         self.points += newPoints
     }
-
-    public func getName() -> String {   name!    }
     public func getPoints() -> Int {  points  }
     public func resetResult() {  points = 0  }
-    
-    deinit {
-        print("Clearing player: \(name!) from memory")
-    }
 }

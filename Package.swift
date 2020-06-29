@@ -19,8 +19,11 @@ let package = Package(
             name: "Die",
             dependencies: []),
         .target (
-            name: "Player",
+            name: "Person",
             dependencies: []),
+        .target (
+            name: "Player",
+            dependencies: ["Person"]),
         .target (
             name: "Turn",
             dependencies: ["Die"]),
