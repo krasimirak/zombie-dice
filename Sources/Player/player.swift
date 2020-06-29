@@ -20,4 +20,8 @@ public class Player {
     public func getName() -> String {   name!    }
     public func getPoints() -> Int {  points  }
     public func resetResult() {  points = 0  }
+    
+    deinit {
+        print("Clearing player: \(name!) from memory")
+    }
 }

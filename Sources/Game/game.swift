@@ -4,7 +4,7 @@ import Die
 public class Game {
     var players: [Player] = []
     var dice: [Die] = []
-    var dieInUse: [Bool] = []
+    
     public init (numberOfPlayers: Int) {
         
         for i in 1...numberOfPlayers {
@@ -12,22 +12,15 @@ public class Game {
             players.append(newPlayer)
         }
         
-        for _ in 1...6 {
-            dice.append(Die.green)
-            dieInUse.append(false)
-        }
-        
-        for _ in 1...4 {
-            dice.append(Die.yellow)
-            dieInUse.append(false)
-        }
-        
-        for _ in 1...3 {
-            dice.append(Die.red)
-            dieInUse.append(false)
-        }
+        appendDie(&dice, Die.green, 6)
+        appendDie(&dice, Die.yellow, 4)
+        appendDie(&dice, Die.red, 3)
+    }
+    deinit {
+        print("Clearing game from memory")
     }
 }
+
 
 func getNumPlayers() -> Int {
     var numPlayersInput: String? = nil
@@ -56,6 +49,11 @@ func validateNumberOfPlayers(_ num: Int?) -> Int {
     return num!
 }
 
+var appendDie: (inout [Die], Die, Int) -> Void = { (arr, color, count) in
+    for _ in 1...count {
+        arr.append(color)
+    }
+}
 
 func getPlayer(playerNumber: Int) -> Player {
     print("\n\nPlease enter player \(playerNumber) name: ")

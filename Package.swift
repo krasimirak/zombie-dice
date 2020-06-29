@@ -22,8 +22,11 @@ let package = Package(
             name: "Player",
             dependencies: []),
         .target (
+            name: "Turn",
+            dependencies: ["Die"]),
+        .target (
             name: "Game",
-            dependencies: ["Die", "Player"]),
+            dependencies: ["Die", "Player", "Turn"]),
         .testTarget(
             name: "ZombieDiceGameTests",
             dependencies: ["ZombieDiceGame"]),
