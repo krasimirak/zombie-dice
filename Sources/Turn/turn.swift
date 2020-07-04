@@ -13,7 +13,7 @@ public struct Turn {
         }
     }
     
-    mutating func chooseDice(inout numberOfDice: Int, diceCollectionCount: Int, inout inUse: [Bool]) {
+    mutating func chooseDice(inout numberOfDice: Int, diceCollectionCount: Int, inout inUse: [Bool]) -> [Int] {
         let diceIndexes = 0...(diceCollectionCount - 1)
         
         // check if needed dice for turn are more than the available dice
@@ -40,6 +40,8 @@ public struct Turn {
             resultDiceIndex.append(currentIndex)
             inUse[currentIndex] = true
         }
+        
+        
     }
     
     func startTurn() {
