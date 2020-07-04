@@ -5,7 +5,7 @@ public struct Turn {
     var currentFeet: Int = 0
     var currentBombs: Int = 0
     
-    var inUse: [Bool]
+    var inUse: [Bool] = []
     
     init(diceCollectionCount: Int) {
         for _ in 1...diceCollectionCount {
@@ -13,13 +13,13 @@ public struct Turn {
         }
     }
     
-    mutating func chooseDice(inout numberOfDice: Int, diceCollectionCount: Int, inout inUse: [Bool]) -> [Int] {
+    mutating func chooseDice(numberOfDice: inout Int, diceCollectionCount: Int,  inUse: inout [Bool]) -> [Int] {
         let diceIndexes = 0...(diceCollectionCount - 1)
         
         // check if needed dice for turn are more than the available dice
         var freeDice: Int = 0
         for i in diceIndexes {
-            if ! inUse[i] {
+            if !inUse[i] {
                 freeDice += 1
             }
         }
@@ -41,7 +41,7 @@ public struct Turn {
             inUse[currentIndex] = true
         }
         
-        
+        return resultDiceIndex
     }
     
     func startTurn() {
