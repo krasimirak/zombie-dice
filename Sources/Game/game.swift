@@ -1,5 +1,6 @@
 import Player
 import Die
+import Turn
 
 public class Game {
     var players: [Player] = []
@@ -16,9 +17,17 @@ public class Game {
         appendDie(&dice, Die.green, 6)
         appendDie(&dice, Die.yellow, 4)
         appendDie(&dice, Die.red, 3)
+        startTurns()
     }
     deinit {
         print("Clearing game from memory")
+    }
+    
+    public func startTurns() {
+        for player in players {
+            print("Players count : \(players.count)")
+            let _ = Turn(diceCollection: dice, player: &player)
+        }
     }
 }
 
