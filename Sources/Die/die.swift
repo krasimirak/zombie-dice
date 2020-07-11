@@ -21,5 +21,5 @@ public func rollADie(die: Die) -> String {
     }
     
     let side = Int.random(in: 1...6) // choose a side from the 6 available
-    return currentDie.shuffled()[side]
+    return currentDie.shuffled()[side - 1] // indexes from 0 to 5
 }

@@ -24,8 +24,7 @@ public class Game {
     }
     
     public func startTurns() {
-        for player in players {
-            print("Players count : \(players.count)")
+        for var player in players {
             let _ = Turn(diceCollection: dice, player: &player)
         }
     }
