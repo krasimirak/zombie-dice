@@ -79,6 +79,7 @@ extension Turn {
             }
         }
 
+        diceToRoll = toRollAgain
         printTurnResult(result)
         
         if player.getPoints() + currentBrains >= 13 {
