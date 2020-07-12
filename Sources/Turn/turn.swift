@@ -82,6 +82,7 @@ extension Turn {
         printTurnResult(result)
         
         if player.getPoints() + currentBrains >= 13 {
+            player.addPoints(newPoints: currentBrains)
             return .win
         }
         

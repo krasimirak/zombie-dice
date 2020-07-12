@@ -38,22 +38,26 @@ var appendDie: (inout [Die], Die, Int) -> Void = { (arr, color, count) in
 
 extension Game {
     public func startTurns(tableCellWidth: Int) {
-        for var player in players {
-            let turn = Turn(diceCollection: dice, player: &player)
-            
-            printResults(tableCellWidth: tableCellWidth)
-            if turn.isAWin() {
-                print("\(player.getName()) has eaten \(player.getPoints()) brains! \( player.getName()) ) won !!")
-                print("If you would like to continue a new game with the same players write C then press enter. If you would like to quit just press enter.")
-                let action = readLine()
+        repeat {
+            for var player in players {
+                print("\n\n\t \(player.getName()) it's your turn")
+                let turn = Turn(diceCollection: dice, player: &player)
                 
-                if action != "C" {
+                printResults(tableCellWidth: tableCellWidth)
+                if turn.isAWin() {
+                    print("\t\(player.getName()) has eaten \(player.getPoints()) brains! \( player.getName()) WON !!")
+                    print("If you would like to continue a new game with the same players write C then press enter. If you would like to quit just press enter.\n")
+                    let action = readLine()
+                    
+                    if action != "C" {
+                        return
+                    }
                     return
+                    // TO DO RESET GAME
                 }
-                
-                // TO DO RESET GAME
             }
-        }
+        } while true
+        
     }
 }
 
