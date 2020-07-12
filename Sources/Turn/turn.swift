@@ -28,10 +28,10 @@ public struct Turn {
         case .win:
             winningTurn = true
         case .noPoints:
-            print("You got 3 bombs; No points added")
+            print("\t\tYou got 3 bombs; No points added")
         case .addedPoints:
             player.addPoints(newPoints: currentBrains)
-            print("\(currentBrains) points added!")
+            print("\t\t\(currentBrains) points added!")
         default:
             break
         }
@@ -86,7 +86,7 @@ extension Turn {
             return .win
         }
         
-        print("Do you want to keep the points or continue. Enter: k to keep or press enter to continue rolling the dice")
+        print("\t\tDo you want to keep the points or continue. Enter: k to keep or press enter to continue rolling the dice")
         let action = readLine()
         
         if action == "k" {

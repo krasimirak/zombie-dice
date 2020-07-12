@@ -45,7 +45,7 @@ extension Game {
                 
                 printResults(tableCellWidth: tableCellWidth)
                 if turn.isAWin() {
-                    print("\t\(player.getName()) has eaten \(player.getPoints()) brains! \( player.getName()) WON !!")
+                    print("\t\(player.getName()) has eaten \(player.getPoints()) brains! \( player.getName()) WON !!\n\n")
                     print("If you would like to continue a new game with the same players write C then press enter. If you would like to quit just press enter.\n")
                     let action = readLine()
                     
