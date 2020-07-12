@@ -26,7 +26,7 @@ public class Game {
     }
     
     deinit {
-        print("Clearing game from memory")
+//        print("Clearing game from memory")
     }
 }
 
@@ -38,6 +38,9 @@ var appendDie: (inout [Die], Die, Int) -> Void = { (arr, color, count) in
 
 extension Game {
     public func startTurns(tableCellWidth: Int) {
+        var runGame: Bool = true
+        var resetGame: Bool = false
+        
         repeat {
             for var player in players {
                 print("\n\n\t \(player.getName()) it's your turn")
@@ -52,12 +55,22 @@ extension Game {
                     if action != "C" {
                         return
                     }
-                    return
-                    // TO DO RESET GAME
+                    
+                    runGame = false
+                    resetGame = true
+                    break
                 }
             }
-        } while true
+        } while runGame
         
+        if resetGame {
+            for player in players {
+                player.resetResult()
+            }
+            
+            print("\n\n\n\n\n Game starts over \n\n\n\n\n")
+            startTurns(tableCellWidth: tableCellWidth)
+        }
     }
 }
 

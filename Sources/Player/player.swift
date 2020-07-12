@@ -14,7 +14,7 @@ public class Player: Person {
     }
     
     deinit {
-        print("Clearing player: \(name) from memory")
+//        print("Clearing player: \(name) from memory")
     }
 }
 
