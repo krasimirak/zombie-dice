@@ -84,23 +84,23 @@ extension Turn {
 
             if checkRollResult(result: currentDieResult) == .noPoints {
                 print(result)
-                return Result.noPoints
+                return .noPoints
             }
         }
         print(result)
 
         if player.getPoints() + currentBrains >= 13 {
-            return Result.win
+            return .win
         }
         
         print("Do you want to keep the points or continue. Enter: k to keep or press enter to continue rolling the dice")
         let action = readLine()
         
         if action == "k" {
-            return Result.addedPoints
+            return .addedPoints
         }
         
-        return Result.doNothing
+        return .doNothing
     }
 }
 
@@ -156,7 +156,6 @@ extension Turn {
         }
         
         if currentBombs >= 3 {
-            endTurn(points: 0)
             return .noPoints
         }
         
