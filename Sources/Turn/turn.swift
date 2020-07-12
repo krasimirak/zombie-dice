@@ -1,6 +1,7 @@
 import Die
 import Player
 import Result
+import Helpers
 
 public struct Turn {
     var currentBrains: Int = 0
@@ -35,17 +36,6 @@ public struct Turn {
             break
         }
     }
-    
-    func endTurn(points: Int) {
-        
-        if points == 0 {
-            print("You have at least 3 bombs\n You do not get points from your turn")
-        }
-        else {
-            print("\(points) \(points == 1 ? "point has" : "points have") been added to your result")
-        }
-    }
-    
 }
 
 extension Turn {
@@ -64,6 +54,7 @@ extension Turn {
     mutating func rollDice(gameDice: [Die]) -> Result {
         let newDice: [Int] = chooseDice(numberOfDice: 3 - diceToRoll.count)
         diceToRoll.append(contentsOf: newDice)
+        
         var result: String = ""
         var currentDieColor: Die
         var currentDieResult: String
@@ -71,24 +62,25 @@ extension Turn {
         
         currentFeet = 0
         
-        print("Dice you rolled are:")
+        print("\n\nDice you rolled are:")
         
         for diceIndex in diceToRoll {
             currentDieColor = gameDice[diceIndex];
             currentDieResult = rollADie(die: currentDieColor);
-            result += "\(currentDieColor): \(currentDieResult)\t"
+            result += "\(currentDieColor): \(currentDieResult) \t"
 
             if currentDieResult == "👣" {
                 toRollAgain.append(diceIndex)
             }
 
             if checkRollResult(result: currentDieResult) == .noPoints {
-                print(result)
+                printTurnResult(result)
                 return .noPoints
             }
         }
-        print(result)
 
+        printTurnResult(result)
+        
         if player.getPoints() + currentBrains >= 13 {
             return .win
         }
@@ -165,4 +157,20 @@ extension Turn {
 
 extension Turn {
     public func isAWin() -> Bool { winningTurn }
+}
+
+
+extension Turn {
+    func printTurnResult(_ result: String) {
+        let lineLength: Int = result.count + 3 * 4 // adding tabulation
+        
+        var toPrint: String = appendChar(times: lineLength, char: "=")
+        toPrint += "\n"
+        toPrint += result
+        toPrint += "\n"
+        toPrint += appendChar(times: lineLength, char: "=")
+        toPrint += "\n"
+        
+        print(toPrint)
+    }
 }

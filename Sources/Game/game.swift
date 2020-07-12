@@ -62,17 +62,18 @@ extension Game {
         var result: String = "\n"
 
         for player in players {
-            result += appendChar(times: tableCellWidth + 5, char: "=")
+            result += appendChar(times: tableCellWidth + 6, char: "=")
             result += "\n"
             
             let playerNameLength: Int = player.getName().count
             result += player.getName()
             result += appendChar(times: tableCellWidth - playerNameLength, char: " ")
-            result += "| \(player.getPoints()) \n"
+            result += "|| \(player.getPoints()) \n"
         }
         
-        result += appendChar(times: tableCellWidth + 5, char: "=")
+        result += appendChar(times: tableCellWidth + 6, char: "=")
         result += "\n"
+        print("Results by now:")
         print(result)
     }
 }
